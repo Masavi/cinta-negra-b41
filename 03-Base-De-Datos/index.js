@@ -1,15 +1,18 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const server = express();
-const PORT = 6000;
+const PORT = 4000;
 
 // Tomar la URL de conexion de Mongo Atlas
 // Sustituir usuario y contraseña en esa URL
 const MONGO_URI = 'mongodb://maui:abc123def@cinta-negra-shard-00-00-efwi5.mongodb.net:27017,cinta-negra-shard-00-01-efwi5.mongodb.net:27017,cinta-negra-shard-00-02-efwi5.mongodb.net:27017/test?ssl=true&replicaSet=cinta-negra-shard-0&authSource=admin&retryWrites=true&w=majority';
 // Conexión a Mongo Atlas
-mongoose.connect(MONGO_URI)
-  .then(() => console.log('Conexion exitosa'))
-  .catch(() => console.log('Error en la URI de conexion'));
+mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => console.log('Successful connection to Atlas'))
+  .catch(() => console.log('Atlas connection error...'));
 
 // Configuración de middlewares
 server.use(express.urlencoded({ extended: true }));
