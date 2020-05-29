@@ -49,36 +49,42 @@ server.get('/', (req, res) => {
 
 // CREATE
 server.post('/api/pets', (req, res) => {
-  // Intento crear y guradar en la base de datos una pet
-  res.status(201).json({});
+  const { body } = req;
+  Pets.create(body)
+    .then(pet => res.status(201).json( pet ))
+    .catch(err => res.status(400).json({ err }));
 });
 
 // READ (ALL)
 server.get('/api/pets', (req, res) => {
-  // Busco y obtengo todos los pets en la BD
-  res.status(200).json({});
+  Pets.find()
+    .then(pets => res.status(200).json( pets ))
+    .catch(err => res.status(400).json({ err }));
 });
 
 // READ (ONE)
 server.get('/api/pets/:id', (req, res) => {
   const { id } = req.params;
-  // Utilizo el ID para buscar en la BD
-  res.status(200).json({});
+  Pets.findById(id)
+    .then(pet => res.status(200).json( pet ))
+    .catch(err => res.status(404).json({ err }));
 });
 
 // UPDATE
 server.patch('/api/pets/:id', (req, res) => {
   const { id } = req.params;
   const { body } = req;
-  // Utilizo el BODY y el ID para buscar y actualizar en la BD
-  res.status(200).json({});
+  Pets.findByIdAndUpdate(id, body, { new: true })
+    .then(pet => res.status(200).json( pet ))
+    .catch(err => res.status(404).json({ err }));
 });
 
 // DELETE
 server.delete('/api/pets/:id', (req, res) => {
   const { id } = req.params;
-  // Utilizo el ID para buscar y borrar en la BD
-  res.status(204).json({});
+  Pets.findByIdAndDelete(id)
+    .then(res => res.status(204).send())
+    .catch(err => res.status(404).json({ err }));
 });
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
