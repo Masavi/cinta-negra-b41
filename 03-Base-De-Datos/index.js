@@ -14,6 +14,26 @@ mongoose.connect(MONGO_URI, {
   .then(() => console.log('Successful connection to Atlas'))
   .catch(() => console.log('Atlas connection error...'));
 
+// Mongoose es un ODM -> Object Document Mapping
+// Pets.create Pets.find // Pets es un MODELO
+// Crear un modelo require de un ESQUEMA
+const petsSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  breed: String,
+  sex: String,
+  weight: Number,
+  type: {
+    type: String,
+    required: true,
+  },
+  vaccine: [String],
+});
+
+const Pets = mongoose.model('Pets', petsSchema);
+
 // Configuración de middlewares
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json({ extended: true }));
