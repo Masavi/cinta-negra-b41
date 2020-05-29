@@ -18,13 +18,47 @@ mongoose.connect(MONGO_URI, {
 server.use(express.urlencoded({ extended: true }));
 server.use(express.json({ extended: true }));
 
+// Endpoints
+server.get('/', (req, res) => {
+  res.json({ message: 'Hello World' });
+});
+
 /*
   OBJETIVO: CREAR UN CRUD DE UNA COLECCIÓN BÁSICA
 */
 
-// Endpoints
-server.get('/', (req, res) => {
-  res.json({ message: 'Hello World' });
+// CREATE
+server.post('/api/pets', (req, res) => {
+  // Intento crear y guradar en la base de datos una pet
+  res.status(201).json({});
+});
+
+// READ (ALL)
+server.get('/api/pets', (req, res) => {
+  // Busco y obtengo todos los pets en la BD
+  res.status(200).json({});
+});
+
+// READ (ONE)
+server.get('/api/pets/:id', (req, res) => {
+  const { id } = req.params;
+  // Utilizo el ID para buscar en la BD
+  res.status(200).json({});
+});
+
+// UPDATE
+server.patch('/api/pets/:id', (req, res) => {
+  const { id } = req.params;
+  const { body } = req;
+  // Utilizo el BODY y el ID para buscar y actualizar en la BD
+  res.status(200).json({});
+});
+
+// DELETE
+server.delete('/api/pets/:id', (req, res) => {
+  const { id } = req.params;
+  // Utilizo el ID para buscar y borrar en la BD
+  res.status(204).json({});
 });
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
