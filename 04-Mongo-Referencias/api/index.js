@@ -27,23 +27,28 @@ server.post('/api/products', (req, res) => {
 server.get('/api/products', (req, res) => {
   Products.find()
     .then(products => res.status(200).json(products))
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(404).json(err));
 });
 
 // READ (ONE)
 server.get('/api/products/:id', (req, res) => {
   Products.findById(req.params.id)
     .then(product => res.status(200).json(product))
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(404).json(err));
 });
 
 // UPDATE
 server.patch('/api/products/:id', (req, res) => {
   Products.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then(updatedProduct => res.status(200).json(updatedProduct))
-    .catch(err => res.status(400).json(err));
+    .catch(err => res.status(404).json(err));
 });
 
 // DELETE
+server.delete('/api/products/:id', (req, res) => {
+  Products.findByIdAndDelete(req.params.id)
+    .then(() => res.status(204).send())
+    .catch(err => res.status(404).json(err));
+});
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
