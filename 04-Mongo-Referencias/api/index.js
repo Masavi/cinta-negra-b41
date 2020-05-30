@@ -33,7 +33,10 @@ server.get('/api/products', (req, res) => {
 // READ (ONE)
 server.get('/api/products/:id', (req, res) => {
   Products.findById(req.params.id)
-    .then(product => res.status(200).json(product))
+    .then(product => {
+      if (!product) res.status(404).json({ message: 'product not found' });
+      res.status(200).json(product)
+    })
     .catch(err => res.status(404).json(err));
 });
 
