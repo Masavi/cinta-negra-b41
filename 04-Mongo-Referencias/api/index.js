@@ -38,6 +38,11 @@ server.get('/api/products/:id', (req, res) => {
 });
 
 // UPDATE
+server.patch('/api/products/:id', (req, res) => {
+  Products.findByIdAndUpdate(req.params.id, req.body, { new: true })
+    .then(updatedProduct => res.status(200).json(updatedProduct))
+    .catch(err => res.status(400).json(err));
+});
 
 // DELETE
 
