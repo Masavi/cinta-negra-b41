@@ -12,6 +12,7 @@ server.get('/', (req, res) => {
 // Products
 const Products = require('../models/Products');
 
+// CREATE
 server.post('/api/products', (req, res) => {
     const { body } = req;
     // Products.create
@@ -21,5 +22,18 @@ server.post('/api/products', (req, res) => {
       .then(dbRes => res.status(201).json(dbRes))
       .catch(err => res.status(400).json(err));
 });
+
+// READ (ALL)
+server.get('/api/products', (req, res) => {
+  Products.find()
+    .then(products => res.status(200).json(products))
+    .catch(err => res.status(400).json(err));
+});
+
+// READ (ONE)
+
+// UPDATE
+
+// DELETE
 
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
