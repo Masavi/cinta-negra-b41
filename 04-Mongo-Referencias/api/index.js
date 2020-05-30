@@ -9,4 +9,7 @@ server.get('/', (req, res) => {
   res.json({ message: 'Hello World' });
 });
 
+// Products
+const Products = require('../models/Products');
+
 server.listen(PORT, () => console.log(`Listening on ${PORT}`));
