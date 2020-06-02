@@ -46,4 +46,26 @@ router.delete('/api/tickets/:id', (req, res) => {
     .catch(err => res.status(404).json(err));
 });
 
+// PAY TICKET
+router.patch('/api/tickets/:id/pay-ticket', (req, res) => {
+  Ticket.findById(req.params.id)
+    .populate('products')
+    .then(ticket => {
+      if (!ticket) res.status(404).json({ message: 'ticket not found' });
+      const { products } = ticket;
+      const prices = products.map(product => product.price);
+      // https://www.freecodecamp.org/news/reduce-f47a7da511a9/
+      // const sum = euros.reduce((total, amount) => total + amount); 
+      const subtotal = prices.reduce((total, amount) => total + amount);
+      const tax = (subtotal * 0.16);
+      const total = subtotal + tax;
+      // res.json({ subtotal, tax, total });
+      return Ticket
+        .findByIdAndUpdate(ticket._id, { subtotal, tax, total }, { new: true })
+        .populate('products');
+    })
+    .then(calculatedTicket => res.status(200).json(calculatedTicket))
+    .catch(err => res.status(404).json(err));
+});
+
 module.exports = router;
