@@ -78,6 +78,7 @@ server.get('/api/tickets', (req, res) => {
 // READ (ONE)
 server.get('/api/tickets/:id', (req, res) => {
   Ticket.findById(req.params.id)
+    .populate('products')
     .then(product => {
       if (!product) res.status(404).json({ message: 'product not found' });
       res.status(200).json(product)
