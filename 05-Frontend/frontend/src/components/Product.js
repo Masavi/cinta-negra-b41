@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Product = () => {
-  return ( 
+const Product = (props) => {
+  return (
     <div style={{
       padding: "15px",
       backgroundColor: "navy",
@@ -12,8 +12,8 @@ const Product = () => {
       borderRadius: "5px",
       marginBottom: "10px",
     }}>
-      <h3>Sopa</h3>
-      <h4>9.50</h4>
+      <h3>{ props.name }</h3>
+      <h4>{ `$${props.price}` }</h4>
     </div>
   );
 }

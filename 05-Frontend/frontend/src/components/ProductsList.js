@@ -5,7 +5,9 @@ const ProductsList = () => {
   return ( 
     <React.Fragment>
       <h2>Products</h2>
-      <Product />
+      <Product
+        name="Sopa Nissin"
+        price={10.50} />
     </React.Fragment>
   );
 }
