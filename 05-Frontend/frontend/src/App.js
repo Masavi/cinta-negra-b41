@@ -1,10 +1,12 @@
 import React from 'react';
+import ProductsList from './components/ProductsList';
 
 function App() {
   return (
-    <div>
+    <React.Fragment>
       <h1>Hola Mundo</h1>
-    </div>
+      <ProductsList />
+    </React.Fragment>
   );
 }
 
