@@ -25,9 +25,9 @@ router.get('/api/tickets', (req, res) => {
 router.get('/api/tickets/:id', (req, res) => {
   Ticket.findById(req.params.id)
     .populate('products')
-    .then(product => {
-      if (!product) res.status(404).json({ message: 'product not found' });
-      res.status(200).json(product)
+    .then(ticket => {
+      if (!ticket) res.status(404).json({ message: 'ticket not found' });
+      res.status(200).json(ticket)
     })
     .catch(err => res.status(404).json(err));
 });
