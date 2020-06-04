@@ -1,4 +1,8 @@
 import React, { useState } from 'react';
+// import con ES6
+// const axios = require('axios');
+// import con ES7
+import axios from 'axios';
 
 const NewProductForm = () => {
   const [name, setName] = useState("");
@@ -6,7 +10,9 @@ const NewProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, price);
+    axios.post('http://localhost:4040/api/products', { name, price })
+      .then((res) => console.log(res.data))
+      .catch((err) => console.log(err));
   }
 
   return ( 
