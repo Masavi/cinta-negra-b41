@@ -4,14 +4,15 @@ import React, { useState } from 'react';
 // import con ES7
 import axios from 'axios';
 
-const NewProductForm = () => {
+const NewProductForm = (props) => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:4040/api/products', { name, price })
-      .then((res) => console.log(res.data))
+      .then(() => axios.get('http://localhost:4040/api/products'))
+      .then((res) => props.jeje(res.data))
       .catch((err) => console.log(err));
   }
 

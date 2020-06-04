@@ -24,7 +24,8 @@ const ProductsList = () => {
         }}>
           { products.map(product => <Product key={product._id} name={product.name} price={product.price} />) }
         </article>
-        <NewProductForm />
+        <NewProductForm
+          jeje={setProducts} />
       </section>
     </React.Fragment>
   );
