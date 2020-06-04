@@ -14,14 +14,20 @@ const ProductsList = () => {
   return ( 
     <React.Fragment>
       <h2>Products</h2>
-      <section>
-        <article>
+      <section style={{
+        display: "flex",
+        flexDirection: "row"
+      }}>
+        <article style={{
+          marginRight: "5em",
+        }}>
           { products.map(product => <Product key={product._id} name={product.name} price={product.price} />) }
         </article>
         <aside style={{
           backgroundColor: "#5672f0",
           padding: "1em",
           width: "300px",
+          height: "200px",
         }}>
           <h2 style={{ color: "white" }}>
             Create Product
